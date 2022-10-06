@@ -26,15 +26,15 @@ public class filetranslator {
         if (userResponse.equals("Y")) {
           inputFile = new File("input.txt");
           if(inputFile.createNewFile()) {
-            System.out.println("File Created. exiting");
-            System.exit(1);
+            System.out.println("File Created");
+            continue;
           }
         }
       } catch (NoSuchElementException e) {
         System.out.println("input.txt is blank." + checkForChange);
         System.exit(1);
       }
-    } while (noErrors);
+    } while (!noErrors);
     while (lineIn.hasNextLine()) {
       String userInput = lineIn.nextLine();
       String[] words = userInput.split("\\s+");
