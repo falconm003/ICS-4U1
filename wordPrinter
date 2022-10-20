@@ -1,0 +1,16 @@
+import java.util.*;
+import java.io.*;
+class newMain {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Scanner lineIn = new Scanner(new FileReader("words.txt"));
+        Random r = new Random();
+        String array[] = new String[450000];
+        for(int ctr = 0; ctr < 450000; ctr++) {
+            array[ctr] = lineIn.nextLine();
+        }
+        do {
+            Thread.sleep(1000);
+            System.out.println(array[r.nextInt(450000)]);
+        } while(true);
+    }
+}
