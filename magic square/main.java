@@ -32,7 +32,8 @@ class Main {
         // declaring our parameters
         boolean hasRow = false;
         boolean hasColumn = false; 
-        boolean hasDiagonal = false; 
+        boolean hasDiagonal1 = false; 
+        boolean hasDiagonal2 = false;
 
         // find out if sums of all rows is targetSum
         for(int ctr = 0; ctr < grid.length; ctr++) {
@@ -67,21 +68,21 @@ class Main {
             sum += (grid[ctr][ctr]);
         }
         if (sum == targetSum) {
-            hasDiagonal = true;
+            hasDiagonal1 = true;
         } else if (sum != targetSum) {
-            hasDiagonal = false; 
+            hasDiagonal1 = false; 
         }
         sum = 0;
         for(int ctr = (grid.length - 1); ctr >= 0; ctr--) {
             sum += (grid[ctr][((grid.length-1)-ctr)]);
         }
         if (sum == targetSum) {
-            hasDiagonal = true;
+            hasDiagonal2 = true;
         } else if (sum != targetSum) {
-            hasDiagonal = false; 
+            hasDiagonal2 = false; 
         }
         
-        if (hasRow && hasColumn && hasDiagonal) {
+        if (hasRow && hasColumn && hasDiagonal1 && hasDiagonal2) {
             System.out.println("This is a magic square");
         } else {
             System.out.println("This is NOT a magic square");
