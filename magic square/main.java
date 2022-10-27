@@ -13,10 +13,8 @@ class Main {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter square (e.g. 4 for a 4x4 grid)");
         int square = s.nextInt();
-        System.out.println("Enter sum (e.g. 34)");
-        int targetSum = s.nextInt();
         int[][] grid = new int[square][square];
-        magic(grid, targetSum);
+        magic(grid);
     }
     public static void magic(int[][] grid, int targetSum) {
         Scanner s = new Scanner(System.in);
@@ -28,7 +26,7 @@ class Main {
         }
         printGrid(grid);
         int sum;
-        
+        int targetSum;
         // declaring our parameters
         boolean hasRow = false;
         boolean hasColumn = false; 
@@ -39,15 +37,9 @@ class Main {
         for(int ctr = 0; ctr < grid.length; ctr++) {
             sum = 0;
             for(int ctr2 = 0; ctr2 < grid.length; ctr2++) {
-                sum += grid[ctr2][ctr];
+                sum += grid[ctr][ctr2];
+                targetSum += grid[ctr][ctr2];
             }
-            if (sum == targetSum) {
-                hasRow = true;
-            } else if (sum != targetSum) {
-                hasRow = false;
-                break;
-            }
-
         }
         // find out if sums of all columns is targetSum
         for(int ctr = 0; ctr < grid.length; ctr++) {
