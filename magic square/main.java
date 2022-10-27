@@ -14,9 +14,9 @@ class Main {
         System.out.println("Enter square (e.g. 4 for a 4x4 grid)");
         int square = s.nextInt();
         int[][] grid = new int[square][square];
-        magic(grid);
+        magic(grid, square);
     }
-    public static void magic(int[][] grid, int targetSum) {
+    public static void magic(int[][] grid, int square){
         Scanner s = new Scanner(System.in);
         for(int ctr = 0; ctr < grid.length; ctr++) {
             for(int ctr2 = 0; ctr2 < grid.length; ctr2++) {
@@ -25,55 +25,59 @@ class Main {
             }
         }
         printGrid(grid);
-        int sum;
-        int targetSum;
-        // declaring our parameters
-        boolean hasRow = false;
-        boolean hasColumn = false; 
-        boolean hasDiagonal1 = false; 
-        boolean hasDiagonal2 = false;
+        int[] Row = new int[square];
+        int[] Column = new int[square];
+        int[] Diagonal1 = new int[square];
+        int[] Diagonal2 = new int[square];
+        boolean hasRow = true;
+        boolean hasColumn = true;
+        boolean hasDiagonal1 = true;
+        boolean hasDiagonal2 = true;
 
-        // find out if sums of all rows is targetSum
+        // row
         for(int ctr = 0; ctr < grid.length; ctr++) {
-            sum = 0;
             for(int ctr2 = 0; ctr2 < grid.length; ctr2++) {
-                sum += grid[ctr][ctr2];
-                targetSum += grid[ctr][ctr2];
+                Row[ctr] += grid[ctr][ctr2];
             }
         }
-        // find out if sums of all columns is targetSum
-        for(int ctr = 0; ctr < grid.length; ctr++) {
-            sum = 0;
-            for(int ctr2 = 0; ctr2 < grid.length; ctr2++) {
-                sum += grid[ctr2][ctr];
+        for(int ctr = 0; ctr < Row.length; ctr++) {
+            if (Row[0] != Row[ctr]) {
+                hasRow = false;
             }
-            if (sum == targetSum) {
-                hasColumn = true;
-            } else if (sum != targetSum) {
+        }
+
+        // column
+        for(int ctr = 0; ctr < grid.length; ctr++) {
+            for(int ctr2 = 0; ctr2 < grid.length; ctr2++) {
+                Column[ctr] += grid[ctr2][ctr];
+            }
+        }
+        for(int ctr = 0; ctr < Column.length; ctr++) {
+            if (Column[0] != Column[ctr]) {
                 hasColumn = false;
-                break;
             }
         }
-        // find out if sums of all diagonals is targetSum
-        sum = 0;
+
+        // diagonal 1
         for(int ctr = 0; ctr < grid.length; ctr++) {
-            sum += (grid[ctr][ctr]);
+            Diagonal1[ctr] += (grid[ctr][ctr]);
         }
-        if (sum == targetSum) {
-            hasDiagonal1 = true;
-        } else if (sum != targetSum) {
-            hasDiagonal1 = false; 
-        }
-        sum = 0;
-        for(int ctr = (grid.length - 1); ctr >= 0; ctr--) {
-            sum += (grid[ctr][((grid.length-1)-ctr)]);
-        }
-        if (sum == targetSum) {
-            hasDiagonal2 = true;
-        } else if (sum != targetSum) {
-            hasDiagonal2 = false; 
+        for(int ctr = 0; ctr < Diagonal1.length; ctr++) {
+            if (Diagonal1[0] != Diagonal1[ctr]) {
+                hasDiagonal1 = false;
+            }
         }
         
+        // diagonal 2
+        for(int ctr = (grid.length - 1); ctr >= 0; ctr--) {
+            Diagonal2[ctr] += (grid[ctr][((grid.length-1)-ctr)]);
+        }
+        for(int ctr = 0; ctr < Diagonal2.length; ctr++) {
+            if (Diagonal2[0] != Diagonal2[ctr]) {
+                hasDiagonal2 = false;
+            }
+        }
+
         if (hasRow && hasColumn && hasDiagonal1 && hasDiagonal2) {
             System.out.println("This is a magic square");
         } else {
