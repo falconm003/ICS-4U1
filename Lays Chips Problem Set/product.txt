@@ -1,0 +1,4 @@
+LaysChip 2.19
+CocaCola 1.19
+HotDog 2.59
+OrangeJuice 3.99
